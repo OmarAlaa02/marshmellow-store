@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/cart.css">
+</head>
+<body>
+    <header>
+        <h1>Shopping Cart</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="product-grid">
+            <div class="header-container">
+                <h2>Your Cart</h2>
+                <form action="/deleteCart" method="post" class="clear-cart-form">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <button id="clear-cart" type="submit" class="clear-cart-button">Clear Cart</button>
+                </form>
+            </div>
+            <div id="cart-items">
+                <% if(cart.length > 0) { %>
+                    <% for (product of cart) { %>
+                        <div class="product">
+                            <img src="<%= product.prod.imgUrl %>" alt="Product image">
+                            <div class="product-details">
+                                <h2><%= product.prod.name %></h2>
+                                <p>Quantity: <%= product.qnty %></p>
+                                <form action="/removeCartItem/<%=product.prod._id%>" method="post" class="remove-item-form">
+                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                    <button type="submit" class="remove-item-button">Remove Item</button>
+                                </form>
+                            </div>
+                        </div>
+                    <% } %>
+                    <div class="checkout-container">
+                        <a href="/checkout" class="checkout-button">Checkout</a>
+                        <p class="total-price">Total: $<span id="total-price"><%= totalPrice %></span></p>
+                    </div>
+                <% } else { %>
+                    <h1>No products</h1>
+                <% } %>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer-container">
+        <div class="footer-content">
+            <p>© 2024 MARSHMELLO. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

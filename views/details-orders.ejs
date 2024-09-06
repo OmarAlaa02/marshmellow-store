@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details</title>
+    <link rel="stylesheet" href="/details-orders.css"> 
+</head>
+<body>
+    <header>
+        <h1>Order Details</h1>
+        <nav>
+            <ul>
+                <li><a href="<%= isAdmin === true ? '/admin/home' : '/' %>">Home</a></li>
+                <li><a href="<%= isAdmin === true ? '/admin/orders' : '/orders' %>">Orders</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <% for (let i = 0; i < products.length; i ++) { %>
+            <div class="product">
+                <img src="/<%=products[i].imgUrl%>" alt="product image">
+                <div class="product-info">
+                    <h2>Product Name: <%= products[i].name %></h2>
+                    <p>Product Quantity: <%= products[i].qnty %></p>
+                    <p>Price: <%= products[i].price %></p>
+                </div>
+            </div>
+        <% } %>
+    </main>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders</title>
+    <link rel="stylesheet" href="/adminorder.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>Admin Dashboard</h1>
+            <nav>
+                <ul>
+                    <li><a href="/admin/home">Home</a></li>
+                    <li><a href="/admin/logout">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        <h2>Orders</h2>
+        
+        <!-- Example Order 1 -->
+        <% for(orderItem of orders) {%>
+        <div class="order">
+            <div class="order-info">
+                <div>
+                    <p><strong>Email:</strong> <%=orderItem.email%></p>
+                    <p><strong>Phone:</strong> <%=orderItem.phone%></p>
+                    <p><strong>Address:</strong> <%=orderItem.address%></p>
+                </div>
+                <div class="order-actions">
+                    <form action="/admin/updateOrderStatus/<%=orderItem._id%>" method="post">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+                        <a href="/admin/orders/<%=orderItem._id%>" class="details-btn">Details</a>
+                        <select class="status-select" name="status">
+                            <option value="pending" <% if (orderItem.status === 'pending') { %> selected <% } %>>Pending</option>
+                            <option value="On Its way" <% if (orderItem.status === 'On Its way') { %> selected <% } %>>On Its way</option>
+                            <option value="Shipped" <% if (orderItem.status === 'Shipped') { %> selected <% } %>>Shipped</option>
+                        </select>
+                        <button class="update-status-btn" type="submit">Update Status</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <%}%>
+    </div>
+</body>
+</html>

@@ -1,0 +1,261 @@
+/* General Styles */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    color: #333;
+    background: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Wrapper to ensure footer sticks at the bottom */
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Full viewport height */
+}
+
+/* Header Styles */
+header {
+    background-color: #ffffff;
+    color: #333;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid #ddd;
+    width: 100%;
+    position: relative; /* For positioning the menu toggle */
+}
+
+/* Align the hamburger icon to the left and the website name to the right */
+.header-content {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    margin-left: 2rem; /* Space between hamburger icon and website name */
+}
+
+/* Align the hamburger icon to the left side of the header */
+.menu-toggle {
+    font-size: 1.5rem;
+    background: #000; /* Black background */
+    border: none;
+    color: #fff; /* White color for the icon */
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: opacity 0.3s ease;
+    position: absolute;
+    left: 1rem; /* Align to the left */
+    z-index: 1001; /* Ensure it’s above the overlay */
+}
+
+/* Hide the menu toggle button when the menu is open */
+nav.sidebar.active ~ .menu-toggle {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Sidebar Styles */
+nav.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    background: #fff;
+    color: #333;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+    padding-top: 60px;
+    z-index: 1000;
+}
+
+nav.sidebar.active {
+    transform: translateX(0);
+}
+
+/* Overlay Styles */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.overlay.active {
+    display: block;
+}
+
+/* Sidebar Links Styles */
+nav.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav.sidebar ul li {
+    margin-bottom: 1rem;
+}
+
+nav.sidebar ul li a {
+    color: #333;
+    text-decoration: none;
+    display: block;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    background: #fff;
+    transition: background 0.3s;
+}
+
+/* Sidebar Link Hover State */
+nav.sidebar ul li a:hover {
+    background: #000; /* Black background on hover */
+    color: #fff; /* White text color on hover */
+}
+
+/* Main Content Styles */
+main {
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    background: #fff;
+    padding-bottom: 6rem; /* Increased space for the footer */
+}
+
+/* Product Grid Styles */
+.product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+/* Product Card Styles */
+.product {
+    background-color: #fff;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.product:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border-color: #ff69b4;
+}
+
+.product-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.product:hover .product-image {
+    transform: scale(1.1);
+}
+
+/* Add to Cart Button Styles */
+.add-to-cart {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #000;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    text-decoration: none;
+}
+
+.add-to-cart:hover {
+    background-color: #333;
+    transform: scale(1.05);
+}
+
+/* Animation Effect for Click */
+.add-to-cart.clicked {
+    animation: clickEffect 0.3s ease-out;
+}
+
+@keyframes clickEffect {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Footer Styles */
+footer {
+    background-color: #ffffff;
+    color: #333;
+    padding: 1rem;
+    text-align: center;
+    border-top: 1px solid #ddd;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+/* Lightbox Styles */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1002;
+}
+
+.lightbox-content {
+    max-width: 80%;
+    max-height: 80%;
+}
+
+.lightbox img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 2rem;
+    color: #fff;
+    cursor: pointer;
+}

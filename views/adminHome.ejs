@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Home</title>
+    <link rel="stylesheet" href="/admin-home.css">
+</head>
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+        <nav>
+            <ul>
+                <li><a href="/admin/addproduct">Add Product</a></li>
+                <li><a href="/admin/orders">orders</a></li>
+                <li><a href="/admin/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="product-grid">
+            <% if(products.length > 0) {%>
+                <%for (product of products){%>
+                    <div class="product">
+                        <img src="/<%=product.imgUrl%>" alt="Product image">
+                        <h2><%= product.name%></h2>
+                        <p>$<%=product.price%></p>
+                        <div class="actions">
+                            <a href="/admin/editproduct/<%=product._id%>" class="edit-btn">Edit</a>
+                            <button class="delete-btn"> <a href="/admin/delete/<%=product._id%>">Delete</a></button>
+                        </div>
+                    </div>
+                <%}%>
+            <% }else {%>
+                <h1>no products</h1>
+            <%}%>
+            
+        </div>
+    </main>
+</body>
+</html>

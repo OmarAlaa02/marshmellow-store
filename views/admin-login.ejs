@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="/admin-login.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Admin Login</h2>
+        <% if(errorMessage.length) {%>
+            <h1><%=errorMessage%></h1>
+        <%}%>
+        <form action="/admin/signin" method="POST">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <input type="text" name="email" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>

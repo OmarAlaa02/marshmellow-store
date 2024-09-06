@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Home</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="overlay"></div>
+
+        <header>
+            <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+            <div class="header-content">
+                <h1>MARSHMELLO</h1>
+            </div>
+            <div class="search-container">
+                <form>
+                    <input type="text" placeholder="Search...">
+                </form>
+            </div>
+        </header>
+
+        <nav class="sidebar">
+            <ul>
+                <% if(isLogged){%>
+                    <li><a href="/cart" id="cart-link" data-cart-length="<%= cartlen %>">Cart (<span id="cart-count"><%= cartlen %></span>)</a></li>
+                    <li><a href="/orders">Orders</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                    <li><a href="/changepassword">Change Password</a></li>
+                <% } else { %>
+                    <li><a href="/signin">Sign In</a></li>
+                    <li><a href="/signup">Sign Up</a></li>
+                <% } %>
+            </ul>
+        </nav>
+
+        <main>
+            <div class="product-grid">
+                <% if (products.length > 0) { %>
+                    <% for (let product of products) { %>
+                        <% if (product.name.toLowerCase().includes(searchFilter)) { %>
+                            <div class="product" data-name="<%= product.name %>">
+                                <img src="<%= product.imgUrl %>" alt="Product image" class="product-image">
+                                <div class="product-details">
+                                    <h2><%= product.name %></h2>
+                                    <p>$<%= product.price %></p>
+                                    <% if (isLogged) { %>
+                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                        <button class="add-to-cart" onclick="addcart('<%= product._id %>', this)">Add to Cart</button>
+                                    <% } %>
+                                </div>
+                            </div>
+                        <% } %>
+                    <% } %>
+                <% } else { %>
+                    <p>No products available.</p>
+                <% } %>
+            </div>
+        </main>
+
+        <footer>
+            <p>© 2024 MARSHMELLO. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <div id="lightbox" class="lightbox">
+        <span class="close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const sidebar = document.querySelector('nav.sidebar');
+    const overlay = document.querySelector('.overlay');
+
+    menuToggle.addEventListener('click', function () {
+        sidebar.classList.toggle('active');
+        overlay.classList.toggle('active');
+        menuToggle.classList.toggle('active'); // Add this line
+    });
+
+    overlay.addEventListener('click', function () {
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+        menuToggle.classList.remove('active'); // Add this line
+    });
+});
+
+    </script>
+    <script src="/scripts/addcart.js"></script>
+</body>
+</html>

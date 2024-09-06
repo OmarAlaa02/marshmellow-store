@@ -1,0 +1,108 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    color: #4a4a4a;
+    background: linear-gradient(120deg, #f6d365, #fda085, #fbc2eb, #e6dee9);
+    background-size: 200% 200%;
+    animation: backgroundAnimation 20s ease infinite;
+}
+
+@keyframes backgroundAnimation {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+    100% { background-position: 0% 0%; }
+}
+
+.signup-container {
+    max-width: 400px;
+    margin: 5% auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    animation: fadeIn 2s forwards;
+    border: 1px solid #ddd;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+.signup-container h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+    animation: textAnimation 3s infinite alternate;
+}
+
+@keyframes textAnimation {
+    0% { color: #FFD700; }
+    100% { color: #FF69B4; }
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-group {
+    text-align: left;
+}
+
+label {
+    font-size: 1rem;
+    color: #4a4a4a;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #ff69b4;
+    box-shadow: 0 0 8px rgba(255, 105, 180, 0.2);
+}
+
+button[type="submit"] {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #ff69b4;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button[type="submit"]:hover {
+    background-color: #ff1493;
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Error message styles */
+.error-message {
+    font-size: 1.2rem;
+    color: #ff3366;
+    margin-top: 1rem;
+    background-color: #ffe6f2;
+    padding: 0.8rem;
+    border-radius: 4px;
+    border: 1px solid #ff3366;
+}
