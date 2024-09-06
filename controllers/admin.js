@@ -141,10 +141,8 @@ exports.getOrderDetails=async(req,res)=>{
 
 exports.postUpdateStatus=async(req,res)=>{
     const orderID=req.params.ID;
-    await checkoutschema.findOneAndUpdate({_id:orderID},{
+    await checkoutschema.updateOne({_id:orderID},{
         status:req.body.status
-    },{
-        new:true
     })
     
     res.redirect('/admin/orders');
