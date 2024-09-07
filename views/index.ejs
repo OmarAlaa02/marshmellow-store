@@ -5,64 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop Home</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        .wrapper {
-            display: flex;
-        }
-
-        /* Sidebar styles */
-        nav.sidebar {
-            position: fixed;
-            left: -250px;
-            top: 0;
-            width: 250px;
-            height: 100%;
-            background-color: #333;
-            transition: left 0.3s ease;
-        }
-
-        nav.sidebar.active {
-            left: 0;
-        }
-
-        .menu-toggle {
-            position: fixed;
-            top: 15px;
-            left: 15px;
-            z-index: 1001;
-            font-size: 30px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-        }
-
-        /* Move the button after the sidebar */
-        .menu-toggle.active {
-            left: 265px;
-        }
-
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-            z-index: 1000;
-        }
-
-        .overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .product-grid {
-            margin-left: 270px; /* Adjust margin for the content when sidebar is shown */
-        }
-    </style>
+    
 </head>
 <body>
     <div class="wrapper">
@@ -73,6 +16,13 @@
             <div class="header-content">
                 <h1>MARSHMELLO</h1>
             </div>
+
+            <% if(isLogged) { %>
+                <a href="/cart" class="cart-button">
+                    <img src="https://img.icons8.com/?size=100&id=42382&format=png&color=FFFFFF" alt="Cart">
+                </a>
+            <% } %>
+
             <div class="search-container">
                 <form action="/search" method="post">
                     <input type="text" placeholder="Search..." name="search">
@@ -85,10 +35,22 @@
         <nav class="sidebar">
             <ul>
                 <% if(isLogged){%>
-                    <li><a href="/cart" id="cart-link" data-cart-length="<%= cartlen %>">Cart (<span id="cart-count"><%= cartlen %></span>)</a></li>
-                    <li><a href="/orders">Orders</a></li>
-                    <li><a href="/logout">Logout</a></li>
-                    <li><a href="/changepassword">Change Password</a></li>
+                    <a href="/orders" class="orders-button">
+                        <img src="https://img.icons8.com/?size=100&id=CXYDRXfni2jj&format=png&color=FFFFFF" alt="Icon" class="orders-icon">
+                        <span>Orders</span>
+                    </a>
+                    <a href="/changepassword" class="change-password-button">
+                        <img src="https://img.icons8.com/?size=100&id=107272&format=png&color=FFFFFF" alt="Change Password Icon" class="change-password-icon">
+                        <span>Change Password</span>
+                    </a>
+                    
+                    <a href="/logout" class="logout-button">
+                        <img src="https://img.icons8.com/?size=100&id=2445&format=png&color=FFFFFF" alt="Logout Icon" class="logout-icon">
+                        <span>Logout</span>
+                    </a>
+                    
+                    
+                    
                 <% } else { %>
                     <li><a href="/signin">Sign In</a></li>
                     <li><a href="/signup">Sign Up</a></li>

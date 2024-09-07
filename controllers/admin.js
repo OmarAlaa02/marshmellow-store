@@ -114,7 +114,16 @@ exports.postdeleteproduct = async (req, res) => {
 exports.getAdminOrders=async(req,res)=>{
 
     const orders=await checkoutschema.find();
-    // console.log(orders);
+
+    //flip orders
+    const n=orders.length;
+    for(let i=0;i<n/2;i++)
+    {
+        const tmp=orders[i];
+        orders[i]=orders[n-i-1];
+        orders[n-1-i]=tmp;
+    }
+
     res.render('adminorders',{
         orders:orders
     });
