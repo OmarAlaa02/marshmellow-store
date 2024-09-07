@@ -34,17 +34,18 @@ const sendMail = async (transporter, info) => {
 }
 
 exports.getIndexPage = async (req, res) => {
-    let products = await ProductsDB.find();
-    //search for user
-    const user = await UsersDB.findById(req.session.userID);
+    // let products = await ProductsDB.find();
+    // //search for user
+    // const user = await UsersDB.findById(req.session.userID);
+
+    let all=await Promise.all([ProductsDB.find(), UsersDB.findById(req.session.userID)])
     
     
     res.render('index', {
-        products: products,
-        cartlen: (req.session.isLoggedIn ? user.cart.length : 0),
+        products: all[0],
+        cartlen: (req.session.isLoggedIn ? all[1].cart.length : 0),
         isLogged: req.session.isLoggedIn,
-        searchFilter: req.flash('searchFilter'),
-        isAdmin:(user?.email?user.email==='o.alaa51003@gmail.com':false)
+        searchFilter: req.flash('searchFilter')
     })
 
 }
@@ -381,14 +382,13 @@ exports.postCart = (req, res) => {
            
         res.json({
             usercart:user
-            
         })
         
 };
 
 
 exports.clearCart = async (req, res) => {
-    await UsersDB.findOneAndUpdate({
+    await UsersDB.updateOne({
         _id: req.session.userID
     }, {
         cart: []
@@ -609,13 +609,17 @@ exports.postcheckoutpage = async (req, res) => {
     };
     
 
-    await user.save();
+    // await user.save();
     const addcheckout = new OrdersDB(req.body);
-    await sendMail(transporter, info);
-    await sendMail(transporter, info2);
-    addcheckout.save().then(() => {
-        res.redirect('/');
-    })
+    // await sendMail(transporter, info);
+    // await sendMail(transporter, info2);
+
+    sendMail(transporter, info);
+    sendMail(transporter, info2);
+
+    await Promise.all([user.save(),addcheckout.save()]);
+
+    res.redirect('/');
 
 
 }
@@ -650,19 +654,13 @@ exports.getOrderDetails = async (req, res) => {
     const orderid = req.params.ID
 
     const order = await OrdersDB.findById(orderid);
-    const idofproduct = [];
-    const qnties = [];
 
-    for (let item of order.cart) {
-        idofproduct.push(item.prodId);
-        qnties.push(item.qnty);
-    }
-    const products = [];
-    for (let i = 0; i < idofproduct.length; i++) {
-        const product = await ProductsDB.findById(idofproduct[i]);
-        products.push(product)
-        products.push(qnties[i]);
-
+    const qnties=[];
+    const productPromises = order.cart.map(item => ProductsDB.findById(item.prodId));
+    const products = await Promise.all(productPromises);
+    for (let i=0;i<order.cart.length;i++) 
+    {
+        products[i].qnty=order.cart[i].qnty;
     }
 
 
