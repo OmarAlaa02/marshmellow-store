@@ -79,15 +79,19 @@ header h1 {
 
 
 /* Search Bar Styles */
+/* Search Bar Styles */
+/* Search Bar Styles */
+/* Updated Search Bar Styles */
+/* Updated Search Bar Styles */
+/* Updated Search Bar Styles for Fully Rounded Border */
 .search-container {
     position: relative;
-    max-width: 300px; /* Reduced width */
+    max-width: 900px; /* Increased width */
     margin-left: auto;
     padding: 0.2rem;
     background: linear-gradient(145deg, #ff69b4, #ff1493);
-    border-radius: 25px;
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
-    animation: fadeIn 2s ease-in-out;
+    border-radius: 50px; /* Fully rounded corners */
+    border: 1px solid #ff69b4; /* Small border */
     display: flex;
     align-items: center;
 }
@@ -100,15 +104,16 @@ header h1 {
 
 .search-container input[type="text"] {
     flex: 1;
-    padding: 0.5rem;
+    padding: 0.5rem 1rem; /* Adjust padding */
     border: none;
-    border-radius: 20px;
+    border-radius: 50px; /* Match container's rounded corners */
     outline: none;
     background: #fff;
     color: #333;
     font-size: 1rem;
     transition: background-color 0.3s, color 0.3s;
 }
+
 
 .search-container input[type="text"]::placeholder {
     color: #aaa;
@@ -118,6 +123,7 @@ header h1 {
     background-color: #fce4ec;
     color: #000;
 }
+
 
 /* Sidebar Styles */
 nav.sidebar {
@@ -166,7 +172,10 @@ nav.sidebar ul li a:hover {
     box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.3);
     color: #fff; /* White color for text on hover */
 }
-.orders-button {
+nav.sidebar .home-button,
+nav.sidebar .orders-button,
+nav.sidebar .change-password-button,
+nav.sidebar .logout-button {
     display: flex;
     align-items: center;
     padding: 0.5rem 1rem;
@@ -175,59 +184,27 @@ nav.sidebar ul li a:hover {
     border-radius: 20px;
     transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
-    background: #333; /* Match the sidebar background color */
+    margin-bottom: 0.5rem;
 }
 
-.orders-button:hover {
+nav.sidebar .home-button:hover,
+nav.sidebar .orders-button:hover,
+nav.sidebar .change-password-button:hover,
+nav.sidebar .logout-button:hover {
     background: linear-gradient(145deg, #ff1493, #ff69b4);
     transform: scale(1.1);
     box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.3);
-    color: #fff; /* White color for text on hover */
+    color: #fff;
 }
 
-.orders-icon {
+nav.sidebar .home-icon,
+nav.sidebar .orders-icon,
+nav.sidebar .change-password-icon,
+nav.sidebar .logout-icon {
     width: 30px;
     height: 30px;
-    margin-right: 10px; /* Space between icon and text */
+    margin-right: 10px;
 }
-
-.orders-button span {
-    display: inline-block;
-    margin-top: 4px; /* Adjust this value to move the text down */
-}
-
-
-.logout-button, .change-password-button {
-    display: flex;
-    align-items: center;
-    padding: 0.5rem 1rem;
-    text-decoration: none;
-    color: #ffffff;
-    border-radius: 20px;
-    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
-    background: #333; /* Match the sidebar background color */
-}
-
-.logout-button:hover, .change-password-button:hover {
-    background: linear-gradient(145deg, #ff1493, #ff69b4);
-    transform: scale(1.1);
-    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.3);
-    color: #fff; /* White color for text on hover */
-}
-
-.logout-icon, .change-password-icon {
-    width: 30px; /* Ensure icons are the same size */
-    height: 30px; /* Ensure icons are the same size */
-    margin-right: 10px; /* Space between icon and text */
-}
-
-.logout-button span, .change-password-button span {
-    display: inline-block;
-    margin-top: 2px; /* Adjust this value to align text with icon */
-}
-
-
 
 /* Main Content Styles */
 main {
@@ -304,18 +281,21 @@ main {
 /* Ensure the footer has a fixed height for proper positioning */
 /* Smaller Footer Styles */
 /* Smaller Footer Styles */
+/* Footer Styles */
 footer {
     background-color: #333;
     color: #FFD700;
-    padding: 0.5rem 1rem; /* Reduced padding */
-    text-align: center;
+    height: 50px; /* Reduce the height */
+    display: flex; /* Enable flexbox */
+    justify-content: center; /* Center text horizontally */
+    align-items: center; /* Center text vertically */
     border-top: 2px solid #ff69b4;
     box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
-    position: relative;
+    padding: 0; /* Remove padding for a tighter layout */
     z-index: 10;
-    height: 50px; /* Reduced height */
-    line-height: 50px; /* Align text vertically */
+    line-height: normal; /* Ensure no extra vertical space */
 }
+
 
 /* Adjust cart button positioning if needed */
 .cart-button {

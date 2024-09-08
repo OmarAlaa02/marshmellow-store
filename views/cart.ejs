@@ -8,14 +8,33 @@
     <link rel="stylesheet" href="/cart.css">
 </head>
 <body>
-    <header>
-        <h1>Shopping Cart</h1>
-        <nav>
+    <div class="wrapper"></div>
+        <header>
+            <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+            <div class="header-content">
+                <h1>MARSHMELLO</h1>
+            </div>
+        </header>
+        <nav class="sidebar">
             <ul>
-                <li><a href="/">Home</a></li>
+                <a href="/" class="home-button">
+                    <img src="https://img.icons8.com/?size=100&id=73&format=png&color=FFFFFF" alt="Home Icon" class="home-icon">
+                    <span>Home</span>
+                </a>
+                <a href="/orders" class="orders-button">
+                    <img src="https://img.icons8.com/?size=100&id=CXYDRXfni2jj&format=png&color=FFFFFF" alt="Icon" class="orders-icon">
+                    <span>Orders</span>
+                </a>
+                <a href="/changepassword" class="change-password-button">
+                    <img src="https://img.icons8.com/?size=100&id=107272&format=png&color=FFFFFF" alt="Change Password Icon" class="change-password-icon">
+                    <span>Change Password</span>
+                </a>
+                <a href="/logout" class="logout-button">
+                    <img src="https://img.icons8.com/?size=100&id=2445&format=png&color=FFFFFF" alt="Logout Icon" class="logout-icon">
+                    <span>Logout</span>
+                </a>
             </ul>
         </nav>
-    </header>
 
     <main>
         <div class="product-grid">
@@ -57,5 +76,23 @@
             <p>© 2024 MARSHMELLO. All rights reserved.</p>
         </div>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const sidebar = document.querySelector('nav.sidebar');
+
+            menuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+
+                if (sidebar.classList.contains('active')) {
+                    menuToggle.style.transform = 'rotate(180deg)';
+                    menuToggle.style.marginLeft = '250px'; // Adjust this value as needed
+                } else {
+                    menuToggle.style.transform = 'rotate(0deg)';
+                    menuToggle.style.marginLeft = '20px';
+                }
+            });
+        });
+    </script>
 </body>
 </html>

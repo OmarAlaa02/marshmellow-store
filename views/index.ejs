@@ -27,7 +27,7 @@
                 <form action="/search" method="post">
                     <input type="text" placeholder="Search..." name="search">
                     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                    <button type="submit"></button>
+                    
                 </form>
             </div>
         </header>
@@ -35,6 +35,10 @@
         <nav class="sidebar">
             <ul>
                 <% if(isLogged){%>
+                    <a href="/" class="home-button">
+                        <img src="https://img.icons8.com/?size=100&id=73&format=png&color=FFFFFF" alt="Home Icon" class="home-icon">
+                        <span>Home</span>
+                    </a>
                     <a href="/orders" class="orders-button">
                         <img src="https://img.icons8.com/?size=100&id=CXYDRXfni2jj&format=png&color=FFFFFF" alt="Icon" class="orders-icon">
                         <span>Orders</span>

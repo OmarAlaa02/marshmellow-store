@@ -5,37 +5,92 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orders</title>
     <link rel="stylesheet" href="/userorder.css">
+    <link rel="stylesheet" href="/styles.css"> <!-- Include the main CSS for consistent styling -->
 </head>
 <body>
-    <header>
-        <h1>Shopping Cart</h1>
-        <nav>
+    <div class="wrapper">
+        <header>
+            <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+            <div class="header-content">
+                <h1>MARSHMELLO</h1>
+            </div>
+
+            <a href="/cart" class="cart-button">
+                <img src="https://img.icons8.com/?size=100&id=42382&format=png&color=FFFFFF" alt="Cart">
+            </a>
+        </header>
+
+        <nav class="sidebar">
             <ul>
-                <li><a href="/">Home</a></li>
+                <a href="/" class="home-button">
+                    <img src="https://img.icons8.com/?size=100&id=73&format=png&color=FFFFFF" alt="Home Icon" class="home-icon">
+                    <span>Home</span>
+                </a>
+                <a href="/orders" class="orders-button">
+                    <img src="https://img.icons8.com/?size=100&id=CXYDRXfni2jj&format=png&color=FFFFFF" alt="Icon" class="orders-icon">
+                    <span>Orders</span>
+                </a>
+                <a href="/changepassword" class="change-password-button">
+                    <img src="https://img.icons8.com/?size=100&id=107272&format=png&color=FFFFFF" alt="Change Password Icon" class="change-password-icon">
+                    <span>Change Password</span>
+                </a>
+                <a href="/logout" class="logout-button">
+                    <img src="https://img.icons8.com/?size=100&id=2445&format=png&color=FFFFFF" alt="Logout Icon" class="logout-icon">
+                    <span>Logout</span>
+                </a>
             </ul>
         </nav>
-    </header>
-    <div class="container">
-        <h2>Orders</h2>
-        
-        <!-- Example Order 1 -->
-        <% for(let i=1; i<=orders.length; i++) { %>
-        <div class="order">
-            <div class="order-info">
-                <div class="order-actions">
-                    <p>Order #<%=i%></p>
-                    <button class="details-btn"><a href="/orderDetails/<%=orders[i-1]._id%>">Details</a></button>
-                    <p class="order-status <%= orders[i-1].status%>"><%=orders[i-1].status%></p>
-                    <%if(orders[i-1].status==='pending') {%>
-                        <form action="/deleteOrder/<%=orders[i-1]._id%>" method="post">
-                            <button type="submit">delete</button>
-                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                        </form>
-                    <%}%>
+
+        <main>
+            <div class="container">
+                <h2>Orders</h2>
+
+                <!-- Example Order -->
+                <% for(let i=1; i<=orders.length; i++) { %>
+                <div class="order">
+                    <div class="order-info">
+                        <div class="order-actions">
+                            <p>Order #<%= i %></p>
+                            <button class="details-btn"><a href="/orderDetails/<%= orders[i-1]._id %>">Details</a></button>
+                            <!-- Apply dynamic classes based on order status -->
+                            <p class="order-status <%= orders[i-1].status === 'shipped' ? 'status-shipped' : (orders[i-1].status === 'on its way' ? 'status-on-way' : '') %>">
+                                <%= orders[i-1].status %>
+                            </p>
+                            <% if(orders[i-1].status === 'pending') { %>
+                                <form action="/deleteOrder/<%= orders[i-1]._id %>" method="post">
+                                    <button type="submit" class="delete-btn">Delete</button> <!-- Apply delete-btn class -->
+                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                </form>
+                            <% } %>
+                        </div>
+                    </div>
                 </div>
+                <% } %>
             </div>
-        </div>
-        <% } %>
+        </main>
+
+        <footer>
+            <p>© 2024 MARSHMELLO. All rights reserved.</p>
+        </footer>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const sidebar = document.querySelector('nav.sidebar');
+
+            menuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+
+                if (sidebar.classList.contains('active')) {
+                    menuToggle.style.transform = 'rotate(180deg)';
+                    menuToggle.style.marginLeft = '250px'; // Adjust this value as needed
+                } else {
+                    menuToggle.style.transform = 'rotate(0deg)';
+                    menuToggle.style.marginLeft = '20px';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
