@@ -176,7 +176,7 @@ exports.postSignup = async (req, res) => {
                 <div style="background-color: #f4f4f4; padding: 20px; text-align: center; font-size: 12px; color: #555;">
                     <p>Need help? Contact us at <a href="mailto:support@marshmello.com" style="color: #00563f;">support@marshmello.com</a></p>
         
-                    <!-- Social Media Links -->
+                    
                     <div style="margin: 10px 0;">
                         <a href="your-facebook-url" style="text-decoration: none; margin: 0 10px;">
                             <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" style="width: 24px; height: 24px;">
@@ -207,12 +207,12 @@ exports.postSignup = async (req, res) => {
                 return;
             }
             req.body.password = hash;
-            await sendMail(transporter, info);
+            // await sendMail(transporter, info);
             const newUser = new UsersDB({
                 username,
                 email,
                 password:hash,
-                isverify: false, 
+                isverify: true, 
                 Vcode:verificationToken 
             });
             newUser.save().then(() => {
@@ -782,7 +782,7 @@ exports.postforgetpassword = async (req, res) => {
                 <div style="background-color: #f4f4f4; padding: 20px; text-align: center; font-size: 12px; color: #555;">
                     <p>Need help? Contact us at <a href="mailto:support@marshmello.com" style="color: #00563f;">support@marshmello.com</a></p>
     
-                    <!-- Social Media Links -->
+                    
                     <div style="margin: 10px 0;">
                         <a href="your-facebook-url" style="text-decoration: none; margin: 0 10px;">
                             <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" style="width: 24px; height: 24px;">
